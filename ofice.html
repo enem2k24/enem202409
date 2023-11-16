@@ -7,11 +7,33 @@
 </head>
 <body>
 
+    <input type="file" accept="video/*" id="videoInput" />
     <video controls id="videoPlayer" style="width: 100%; height: 100vh;"></video>
 
     <script>
-        var videoPlayer = document.getElementById('videoPlayer');
-        videoPlayer.src = "2 - Definindo seu perfil.mp4";
+        document.getElementById('videoInput').addEventListener('change', function() {
+            var videoPlayer = document.getElementById('videoPlayer');
+            var videoFile = this.files[0];
+
+            // Verifica se o navegador suporta a API File e se o arquivo é um vídeo
+            if (videoFile && videoFile.type.startsWith('video/')) {
+                videoPlayer.src = 2 - Definindo seu perfil.mp4;
+            } else {
+                alert('Por favor, selecione um arquivo de vídeo válido.');
+            }
+        });
+
+        document.getElementById('videoPlayer').addEventListener('click', function() {
+            if (this.requestFullscreen) {
+                this.requestFullscreen();
+            } else if (this.mozRequestFullScreen) {
+                this.mozRequestFullScreen();
+            } else if (this.webkitRequestFullscreen) {
+                this.webkitRequestFullscreen();
+            } else if (this.msRequestFullscreen) {
+                this.msRequestFullscreen();
+            }
+        });
     </script>
 
 </body>
